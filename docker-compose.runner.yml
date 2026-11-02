@@ -9,7 +9,7 @@ services:
     environment:
       - RUNNER_URL=https://github.com/CK-Lacki1924/swach_city_mobile_app
       - RUNNER_TOKEN=${RUNNER_TOKEN}
-      - RUNNER_NAME=cleani-city-mobile-docker
+      - RUNNER_NAME=cleani-city-mobile-runner
       - RUNNER_LABELS=self-hosted,android,linux
       - RUNNER_EPHEMERAL=true
       - RUNNER_ALLOW_RUNASROOT=true
