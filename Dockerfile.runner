@@ -55,7 +55,7 @@ USER runner
 WORKDIR /home/runner/actions-runner
 
 # Entrypoint script that registers and starts the runner
-COPY --chown=runner:runner entrypoint.sh ./entrypoint.sh
+COPY --chown=runner:runner mobile-app/entrypoint.sh ./entrypoint.sh
 RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
