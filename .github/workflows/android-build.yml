@@ -50,6 +50,9 @@ jobs:
       - name: Gradle wrapper permission
         run: chmod +x android/gradlew
 
+      - name: Set Android SDK location for Gradle
+        run: echo "sdk.dir=/opt/android-sdk" > android/local.properties
+
       - name: Build release APK
         working-directory: android
         run: ./gradlew assembleRelease
