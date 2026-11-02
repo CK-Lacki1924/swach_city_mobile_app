@@ -41,6 +41,9 @@ RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
     "platforms;android-34" \
     "build-tools;34.0.0" > /dev/null 2>&1 || true
 
+# Make SDK writable by the runner user so Gradle can install NDK and other components
+RUN chown -R runner:runner $ANDROID_HOME
+
 # Install GitHub Actions runner
 RUN useradd -m runner && \
     mkdir -p /home/runner/actions-runner && \
