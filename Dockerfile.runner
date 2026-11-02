@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV RUNNER_VERSION=2.314.0
+ENV RUNNER_VERSION=2.330.0
 
 # System deps for Android + Node builds
 RUN apt-get update && apt-get install -y \
