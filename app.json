@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "CleaniCity",
+    "slug": "cleani-city-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1B6B3A"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cleani.city.mobile"
+    },
+    "android": {
+      "package": "com.cleani.city.mobile",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#1B6B3A",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "extra": {
+      "apiUrl": "http://localhost:3000/api",
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "5d73a99c-5c37-465b-932f-532078556665"
+      }
+    },
+    "owner": "cklacki"
+  }
+}
