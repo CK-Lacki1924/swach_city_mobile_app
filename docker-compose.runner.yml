@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  runner:
+    build:
+      context: ..
+      dockerfile: mobile-app/Dockerfile.runner
+    image: cleani-city/runner:latest
+    environment:
+      - RUNNER_URL=https://github.com/CK-Lacki1924/swach_city_mobile_app
+      - RUNNER_TOKEN=${RUNNER_TOKEN}
+      - RUNNER_NAME=cleani-city-mobile-docker
+      - RUNNER_LABELS=self-hosted,android,linux
+      - RUNNER_EPHEMERAL=true
+      - RUNNER_ALLOW_RUNASROOT=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
