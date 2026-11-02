@@ -1,8 +1,9 @@
-FROM actions/runner:latest
+FROM ubuntu:22.04
 
-USER root
+ENV DEBIAN_FRONTEND=noninteractive
+ENV RUNNER_VERSION=2.314.0
 
-# System deps required for Android SDK + Gradle builds
+# System deps for Android + Node builds
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -13,12 +14,18 @@ RUN apt-get update && apt-get install -y \
     libc6-i386 \
     lib32stdc++6 \
     lib32z1 \
+    libicu70 \
     && rm -rf /var/lib/apt/lists/*
 
-# Android SDK locations
+# Node.js 24
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
+# Android SDK
 ENV ANDROID_HOME=/opt/android-sdk
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0
+ENV PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0:$ANDROID_HOME/tools/bin
 
 # Install Android command-line tools
 RUN mkdir -p $ANDROID_HOME/cmdline-tools && \
@@ -34,6 +41,21 @@ RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
     "platforms;android-34" \
     "build-tools;34.0.0" > /dev/null 2>&1 || true
 
+# Install GitHub Actions runner
+RUN useradd -m runner && \
+    mkdir -p /home/runner/actions-runner && \
+    cd /home/runner/actions-runner && \
+    wget -q https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
+    tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
+    rm -f actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
+    ./bin/installdependencies.sh && \
+    chown -R runner:runner /home/runner/actions-runner
+
 USER runner
+WORKDIR /home/runner/actions-runner
+
+# Entrypoint script that registers and starts the runner
+COPY --chown=runner:runner entrypoint.sh ./entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
