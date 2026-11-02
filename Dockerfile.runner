@@ -27,6 +27,9 @@ ENV ANDROID_HOME=/opt/android-sdk
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0:$ANDROID_HOME/tools/bin
 
+# Install GitHub Actions runner user first (needed for SDK ownership)
+RUN useradd -m runner
+
 # Install Android command-line tools
 RUN mkdir -p $ANDROID_HOME/cmdline-tools && \
     wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O /tmp/cmdline-tools.zip && \
@@ -44,9 +47,8 @@ RUN $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
 # Make SDK writable by the runner user so Gradle can install NDK and other components
 RUN chown -R runner:runner $ANDROID_HOME
 
-# Install GitHub Actions runner
-RUN useradd -m runner && \
-    mkdir -p /home/runner/actions-runner && \
+# Install GitHub Actions runner binary
+RUN mkdir -p /home/runner/actions-runner && \
     cd /home/runner/actions-runner && \
     wget -q https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
