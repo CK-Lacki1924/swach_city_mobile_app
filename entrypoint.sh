@@ -3,8 +3,8 @@ set -e
 
 RUNNER_DIR="/home/runner/actions-runner"
 
-# Only register if not already configured (credentials file persists registration state)
-if [ ! -f "$RUNNER_DIR/.credentials" ]; then
+# Only register if not already configured (.runner file persists registration state)
+if [ ! -f "$RUNNER_DIR/.runner" ]; then
     echo "Configuring GitHub Actions self-hosted runner..."
     ./config.sh \
         --url "${RUNNER_URL}" \
