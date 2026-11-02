@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, android, linux]
+    runs-on: self-hosted
     timeout-minutes: 60
 
     steps:
