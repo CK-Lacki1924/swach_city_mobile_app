@@ -49,6 +49,7 @@
           }
         }
       ],
+      "./plugins/withDisableWorkManagerAutoInit.js",
       "expo-router"
     ],
     "extra": {
