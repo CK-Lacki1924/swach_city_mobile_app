@@ -72,6 +72,8 @@ jobs:
 
       # 7. Generate Android project
       - name: Generate Android native code
+        env:
+          CI: 1
         run: npx expo prebuild --platform android --non-interactive
 
       # 8. Configure Gradle permissions
