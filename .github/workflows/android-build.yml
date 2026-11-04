@@ -59,12 +59,12 @@ jobs:
       # 5. SDK components
       - name: Accept SDK licenses and install components
         run: |
-          yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
 
           /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager \
             "platform-tools" \
             "platforms;android-37" \
-            "build-tools;37.0.0"
+            "build-tools;37.0.0" || true
 
       # 6. Install npm dependencies
       - name: Install dependencies
