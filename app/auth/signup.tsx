@@ -72,7 +72,7 @@ export default function SignupScreen() {
           <View style={styles.logoCircle}>
             <ShieldCheck size={32} color={colors.white} />
           </View>
-          <Text style={styles.appName}>CleaniCity</Text>
+          <Text style={styles.appName}>Swach City</Text>
           <Text style={styles.subtitle}>Create your account</Text>
         </View>
 

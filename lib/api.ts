@@ -1,10 +1,13 @@
+import { Constants } from 'expo-constants';
 import axios, { AxiosError } from 'axios';
 
 // Base URL for the backend API.
-//   - Expo Go / emulator (Android): http://10.0.2.2:3000/api
-//   - Physical device on same LAN:  http://<your-computer-ip>:3000/api
-//   - Web / local:                  http://localhost:3000/api
-export const API_BASE = 'http://localhost:3000/api';
+// Read from app.json extra.apiUrl so it works on emulator/device/web without code changes.
+//   - app.json extra.apiUrl is "http://192.168.1.8:3000/api" (PC's LAN IP, for physical devices)
+//   - Android emulator: set extra.apiUrl to "http://10.0.2.2:3000/api"
+//   - Fallback for local/web: http://localhost:3000/api
+const expoExtra = (Constants.expoConfig?.extra as { apiUrl?: string } | undefined) ?? {};
+export const API_BASE = expoExtra.apiUrl ?? 'http://localhost:3000/api';
 
 export const api = axios.create({ baseURL: API_BASE });
 
