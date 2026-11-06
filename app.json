@@ -2,7 +2,7 @@
   "expo": {
     "name": "Swach City",
     "slug": "cleani-city-mobile",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./logos/swach_app_logo.png",
     "userInterfaceStyle": "light",
