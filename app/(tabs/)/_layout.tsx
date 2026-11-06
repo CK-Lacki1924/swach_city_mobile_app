@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Home, MapPin, FileText, Users } from 'lucide-react-native';
+import { Home, MapPin, FileText, Users, AlertTriangle } from 'lucide-react-native';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from 'lib/colors';
 import { clearToken } from 'lib/auth';
@@ -51,6 +51,15 @@ export default function TabsLayout() {
           title: 'Complaints',
           tabBarIcon: ({ focused }: { focused: boolean }) => (
             <FileText size={24} color={focused ? colors.primary : colors.textMuted} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(tabs)/report"
+        options={{
+          title: 'Report',
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
+            <AlertTriangle size={24} color={focused ? colors.primary : colors.textMuted} />
           ),
         }}
       />
